@@ -1,0 +1,51 @@
+* Qlocktwo word matrix layouter
+
+Say you want to create a [[https://qlocktwo.com/][qlocktwo]] clone. Now you have a set of words
+that you need to layout on a (LED) matrix. What is the ideal layout
+for your particular set of words? This code will help you find it.
+
+** Usage
+
+Change the words in ~core.clj~ to your language. Choose the size of
+your matrix. Then run the code and pick a layout.
+
+#+BEGIN_EXAMPLE
+$ lein run
+#+END_EXAMPLE
+
+Be aware that this is a complex problem. Depending on your language
+the search space can be in the billions. For the particular dialect of
+Swiss German that I'm looking at there are 22992076800 possible
+solutions.
+
+#+BEGIN_SRC lisp
+qlocktwo-words.core> (*
+			(combo/count-permutations minutes)
+			(combo/count-permutations prepositions)
+			(combo/count-permutations hours))
+22992076800
+#+END_SRC
+
+** Examples
+
+#+BEGIN_SRC lisp
+qlocktwo-words.core> (first (layouts words))
+[["jetz" "isch"]
+ ["föif" "zää"]
+ ["viertel"]
+ ["zwänzg" "ab"]
+ ["vor" "halbi"]
+ ["eis" "zwöi"]
+ ["drü" "vieri"]
+ ["föifi" "sibni"]
+ ["sächsi" "nüni"]
+ ["achti" "zääni"]
+ ["elfi" "zwölfi"]]
+#+END_SRC
+
+** License
+
+Copyright © 2018 Christian Egli
+
+Distributed under the Eclipse Public License either version 1.0 or (at
+your option) any later version.
