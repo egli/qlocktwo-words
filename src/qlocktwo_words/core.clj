@@ -1,6 +1,7 @@
 (ns qlocktwo-words.core
-  (:require [clojure.math.combinatorics :as combo])
-  (:gen-class))
+  (:gen-class)
+  (:require [clojure.math.combinatorics :as combo]
+            [clojure.string :as str]))
 
 (def matrix {:cols 11 :rows 11})
 
@@ -50,6 +51,11 @@
                 [[] [] 0]
                 words)]
     (conj lines last-line)))
+
+(defn fitness [matrix]
+  (let [rows (count matrix)
+        cols-in-last (count (str/join " " (last matrix)))]
+    [rows cols-in-last]))
 
 (defn layouts [words]
   (->>
